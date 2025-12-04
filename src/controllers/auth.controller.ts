@@ -22,6 +22,7 @@ export const login = async (request: Request, response: Response) => {
       secure: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
       sameSite: "none",
+      path: "/",
     });
 
     return sendSuccess(response, {

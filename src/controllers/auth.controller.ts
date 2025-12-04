@@ -17,16 +17,9 @@ export const login = async (request: Request, response: Response) => {
       throw new AuthenticationError(result.message || "Invalid credentials");
     }
 
-    response.cookie("token", result.token, {
-      httpOnly: true,
-      secure: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      sameSite: "none",
-      path: "/",
-    });
-
     return sendSuccess(response, {
       message: "Login successful",
+      token: result.token,
     });
   } catch (error) {
     return handleError(response, error, "Login error");
@@ -35,12 +28,6 @@ export const login = async (request: Request, response: Response) => {
 
 export const logout = async (request: Request, response: Response) => {
   try {
-    response.clearCookie("token", {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      path: "/",
-    });
     return sendSuccess(response, {
       message: "Logout successful",
     });

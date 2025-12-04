@@ -3,7 +3,8 @@ import jwt from "jsonwebtoken";
 import { AuthRequest } from "../types";
 
 export const authenticate = (request: AuthRequest, response: Response, next: NextFunction) => {
-  const token = request.cookies.token;
+  const authHeader = request.headers.authorization;
+  const token = authHeader?.startsWith("Bearer ") ? authHeader.substring(7) : null;
 
   if (!token) {
     return response.status(401).json({ message: "Unauthorized: No token provided" });

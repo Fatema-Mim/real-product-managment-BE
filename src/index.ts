@@ -18,10 +18,10 @@ if (!process.env.JWT_SECRET) throw new Error("JWT_SECRET is missing in .env");
 const app: Application = express();
 
 const allowedOrigins = [
-  "http://localhost:3000",
-  "http://192.168.0.100:3000",
   "https://real-prduct-managment-fe.vercel.app",
   process.env.FRONTEND_ORIGIN,
+  "http://localhost:3000",
+  "http://192.168.0.100:3000",
 ].filter(Boolean);
 
 app.use(

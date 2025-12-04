@@ -35,7 +35,12 @@ export const login = async (request: Request, response: Response) => {
 
 export const logout = async (request: Request, response: Response) => {
   try {
-    response.clearCookie("token");
+    response.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+    });
     return sendSuccess(response, {
       message: "Logout successful",
     });
